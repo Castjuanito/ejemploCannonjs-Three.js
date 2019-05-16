@@ -16,9 +16,11 @@
         //variables de three.js
         var sphere, plane, scene, aspect, camera, renderer, geometry, material, planeGeometry, planeMaterial;
         //variables de cannon.js
-        var sphereShape, sphereBody, world, groundShape, groundBody,groundMaterial;
+        var sphereShape, sphereBody, world, groundShape, groundBody, groundMaterial;
         //vriales Orbitcontrols
         var controls;
+
+        var puntaje=0;
 
         initCannon();
         init();
@@ -93,7 +95,12 @@
             world.step(dt);
             //se unen las animaciones de los objetos de la fisica y los de la visualizacion.
             sphere.position.copy(sphereBody.position);
-
+            groundBody.addEventListener("collide", function (e) {
+                //console.log("sphere collided")
+                puntaje+=1;
+                //console.log("Puntaje "+puntaje);
+                //groundBody.collisionResponse = 0; // no impact on other bodys; 
+            });
             renderer.render(scene, camera);
         };
         render();
